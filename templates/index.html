@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            {% for book in books %}
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="{{ book.get_image }}" style="width: 400px; height: 500px"  alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h3>
+                        <a href="{% url 'book_detail' book.id %}" class="cta-btn">About<i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+            {% endfor %}
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">News Created</h3>
+                </div>
+            </div>
+
+            <!-- Products tab & slick -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                <!-- Kitoblarni chiqarish `for` sikli -->
+                                {% for book in books %}
+                                <!-- product -->
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width:250px; height:400px">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ book.category.name }}</p>
+                                        <h3 class="product-name">
+                                            <a href="#">{{ book.title }}</a>
+                                        </h3>
+                                        <h4 class="product-price">${{ book.price }}</h4>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><a href="{% url 'book_detail' book.id %}">About</a></button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+                                {% endfor %}
+                            </div>
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Products tab & slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+
+<!-- /SECTION -->
+
+
+<!--TOP SPELLING SECTION -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Top price</h3>
+                </div>
+            </div>
+            <!-- /Section title -->
+
+            <!-- Products tab & slick -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- Category-ga mos mahsulotlarni ko'rsatish uchun qism -->
+                        <div id="category-products" class="tab-pane fade in active">
+                            <div class="products-slick" data-nav="#slick-nav-2">
+                                <!-- Kitoblarni chiqarish uchun 'for' sikli -->
+                                {% for book in book_price %}
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width:250px; height:400px">
+                                        <div class="product-label">
+                                            {% if book.discount %}
+                                            <span class="sale">-{{ book.discount }}%</span>
+                                            {% endif %}
+                                            <span class="new">NEW</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ book.category.name }}</p>
+                                        <h3 class="product-name"><a href="#">{{ book.title }}</a></h3>
+                                        <h4 class="product-price">${{ book.price }} {% if book.old_price %}
+                                            <del class="product-old-price">${{ book.old_price }}</del>
+                                            {% endif %}
+                                        </h4>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><a href="{% url 'book_detail' book.id %}">About</a></button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div id="slick-nav-2" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /Category mahsulotlarini ko'rsatish uchun qism -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Products tab & slick -->
+        </div>
+    </div>
+</div>
+<!-- /SECTION -->
+
+
+
+
+{% endblock %}

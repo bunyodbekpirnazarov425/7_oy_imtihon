@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- store top filter -->
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+                      <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                           id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                          Categories
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <!-- Kategoriyalarni chiqarish uchun `for` sikli qo'shildi -->
+                          <li>
+                              <a class="dropdown-item" href="{% url 'detail_category' %}">Barchasi</a>
+                          </li>
+                          {% for category in categories %}
+                            <li>
+                              <a class="dropdown-item" href="{% url 'detail_category' %}?category_id={{ category.id }}">{{ category.name }}</a>
+                            </li>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+
+                  <ul class="store-grid">
+                        <li class="active"><i class="fa fa-th"></i></li>
+                        <li><a href="#"><i class="fa fa-th-list"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /store top filter -->
+
+                <!-- store products -->
+                <div class="row">
+                  {% for book in books %}
+                    <!-- product -->
+                    <div class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="{{ book.get_image }}" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{ book.category.name }}</p>
+                                <h3 class="product-name"><a href="#">{{ book.name }}</a></h3>
+                                <h4 class="product-price">${{ book.price }}
+                                </h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn">
+                                  <a href="{% url 'book_detail' book.id %}">
+                                    <i class="fa fa-info">
+                                      About
+                                    </i>
+                                  </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /product -->
+                  {% endfor %}
+                </div>
+                <!-- /store products -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+{% endblock content %}

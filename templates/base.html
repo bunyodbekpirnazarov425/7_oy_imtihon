@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include 'components/_style.html' %}
+    </head>
+	<body>
+		<!-- HEADER -->
+		{% include 'components/_header.html' %}
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		{% include 'components/_navbar.html' %}
+		<!-- /NAVIGATION -->
+
+		{% block content %}
+		{% endblock %}
+
+		{% include 'components/_news_letter.html' %}
+
+		<!-- FOOTER -->
+		{% include 'components/_footer.html' %}
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		{% include 'components/_scripts.html' %}
+
+	</body>
+</html>
